@@ -1,0 +1,36 @@
+ :root {
+            --bg: #0f1111; --accent: #61ffda; --card: #161818;
+            --gray: #a0a0a0; --grid: rgba(97, 255, 218, 0.05); --success: #2ecc71;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.3s ease; }
+        body { background-color: var(--bg); color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .grid-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); background-size: 45px 45px; z-index: -1; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .hidden { display: none !important; }
+        .btn-accent { background: var(--accent); color: black; border: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; cursor: pointer; }
+
+        /* Login Screen (White UI) */
+        #login-page { background: white; color: black; min-height: 100vh; width: 100%; display: flex; align-items: center; justify-content: center; position: fixed; top: 0; z-index: 1000; overflow-y: auto; padding: 20px; }
+        .login-card { width: 100%; max-width: 400px; text-align: center; }
+        .social-btn { width: 100%; padding: 14px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; background: white; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: bold; }
+        
+        /* Manual Form Styling */
+        .manual-form { margin-top: 20px; text-align: left; }
+        .manual-form label { font-size: 14px; font-weight: 600; display: block; margin-bottom: 5px; }
+        .manual-form input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; }
+        .divider { margin: 25px 0; display: flex; align-items: center; text-align: center; color: #888; }
+        .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid #eee; }
+        .divider:not(:empty)::before { margin-right: .5em; }
+        .divider:not(:empty)::after { margin-left: .5em; }
+
+        /* Dashboard UI */
+        header { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid #222; margin-bottom: 20px; }
+        #map { height: 300px; width: 100%; border-radius: 15px; border: 1px solid #333; margin-bottom: 25px; z-index: 10; }
+        .slots-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding-bottom: 50px; }
+        .slot-card { background: var(--card); padding: 25px; border-radius: 15px; border: 1px solid #222; }
+
+        /* Payment & Ticket */
+        #payment-screen, #ticket-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); display: flex; align-items: center; justify-content: center; z-index: 5000; }
+        .white-box { background: white; color: black; padding: 40px; border-radius: 20px; width: 400px; text-align: center; }
+        .white-box input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; }
+        .ticket { background: white; color: black; padding: 30px; border-radius: 20px; width: 340px; border: 2px dashed #bbb; margin-top: 20px; }

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartPark India - Multi-Login System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="grid-layer" id="grid"></div>
+
+<div id="website-view" class="container">
+    <header>
+        <div style="font-weight: 800; font-size: 1.5rem;"><span>📍</span> SmartPark</div>
+        <button class="btn-accent" onclick="toggleModal()">Sign In</button>
+    </header>
+    <div id="landing-content">
+        <section style="text-align: center; padding: 80px 0;">
+            <h1 style="font-size: 5rem; letter-spacing: -3px; line-height: 1;">Parking System</h1>
+            <p style="color:var(--gray); margin: 30px 0;">Reserve your spot in seconds across India.</p>
+            <button class="btn-accent" style="padding: 20px 50px;" onclick="toggleModal()">Book a Slot &rarr;</button>
+        </section>
+    </div>
+    <div id="modal-content" class="hidden">
+        <div style="height: 60vh; display: flex; align-items: center; justify-content: center;">
+            <div style="background: var(--card); padding: 50px; border-radius: 24px; text-align: center; width: 450px;">
+                <h2>Welcome Back</h2>
+                <p style="color: var(--gray); margin: 15px 0;">Sign in to manage your parking tickets.</p>
+                <button class="btn-accent" style="width: 100%;" onclick="goToLogin()">Sign In / Sign Up</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="login-page" class="hidden">
+    <div class="login-card">
+        <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 25px;">Log In</h1>
+        
+        <button class="social-btn" onclick="document.getElementById('email-popup').classList.remove('hidden')">
+            <img src="https://www.svgrepo.com/show/475656/google-color.svg" width="20"> Continue with Google
+        </button>
+        
+        <div class="divider">or</div>
+
+        <div class="manual-form">
+            <label>Email Address</label>
+            <input type="email" id="manual-email" placeholder="name@company.com">
+            <label>Password</label>
+            <input type="password" id="manual-pass" placeholder="••••••••">
+            <button class="btn-accent" style="width: 100%; padding: 14px; background: black; color: white;" onclick="handleManualLogin()">Log In</button>
+        </div>
+
+        <p style="margin-top:25px; cursor:pointer; color:#888; font-size: 14px;" onclick="location.reload()">← Back to Home</p>
+    </div>
+</div>
+
+<div id="email-popup" class="hidden" style="position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:white; color:black; padding:30px; border-radius:12px; z-index:2000; box-shadow:0 0 50px rgba(0,0,0,0.2); width:320px;">
+    <p style="font-weight: bold; margin-bottom: 15px;">Choose account</p>
+    <div style="padding:15px; border-bottom:1px solid #eee; cursor:pointer;" onclick="enterDashboard('Meenakshi')"><strong>Meenakshi</strong><br><small>meenakshi@gmail.com</small></div>
+</div>
+
+<div id="dashboard" class="hidden container">
+    <header>
+        <div style="font-weight: 800;">📍 SmartPark <span id="clock" style="color: var(--accent); margin-left:15px;"></span></div>
+        <div id="user-display" style="font-size: 0.8rem; border: 1px solid var(--accent); padding: 5px 10px; border-radius: 20px;"></div>
+    </header>
+    <div id="map"></div>
+    <div class="slots-container">
+        <div class="slot-card">
+            <h3>Elante Mall, Chandigarh</h3>
+            <p style="color:var(--gray); margin: 10px 0;">Status: Open | ₹70/hr</p>
+            <button class="btn-accent" style="width: 100%;" onclick="openPayment('Chandigarh', 70)">Book Slot</button>
+        </div>
+        <div class="slot-card">
+            <h3>Brigade Road, Bangalore</h3>
+            <p style="color:var(--gray); margin: 10px 0;">Status: Open | ₹150/hr</p>
+            <button class="btn-accent" style="width: 100%;" onclick="openPayment('Bangalore', 150)">Book Slot</button>
+        </div>
+    </div>
+</div>
+
+<div id="payment-screen" class="hidden">
+    <div class="white-box">
+        <h2 id="pay-title">Secure Checkout</h2>
+        <input type="text" placeholder="Card Number">
+        <div style="display:flex; gap:10px;"><input type="text" placeholder="MM/YY"><input type="password" placeholder="CVV"></div>
+        <button class="btn-accent" style="width:100%; margin-top:20px; height:50px; background:black; color:white;" onclick="generateTicket()">Pay & Confirm</button>
+    </div>
+</div>
+
+<div id="ticket-screen" class="hidden">
+    <div style="text-align: center;">
+        <h2 style="color: var(--accent); margin-bottom: 15px;">Success! Slot Reserved.</h2>
+        <div class="ticket">
+            <h3>SmartPark Pass</h3>
+            <hr style="margin: 15px 0; border: none; border-top: 1px dashed #ccc;">
+            <div style="text-align: left; line-height: 1.8;">
+                <p><strong>User:</strong> <span id="t-user"></span></p>
+                <p><strong>City:</strong> <span id="t-loc"></span></p>
+                <p><strong>Amount:</strong> ₹<span id="t-amt"></span></p>
+                <p><strong>Date:</strong> 17-Dec-2025</p>
+            </div>
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=TICKET_SP_2025" style="margin-top: 15px;">
+        </div>
+        <button class="btn-accent" style="margin-top: 30px;" onclick="location.reload()">Done</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+
+</script>
+</body>
+</html>
